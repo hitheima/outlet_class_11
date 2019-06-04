@@ -1,4 +1,4 @@
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -51,3 +51,55 @@ class BaseAction:
             return self.find_element(toast_feature, 5, 0.1).text
         else:
             raise Exception("没有找到 对应的toast")
+
+    def scroll_page_one_time(self, direction='up'):
+        """
+        根据方向，滑动半个屏幕一次
+        :param dir:
+            "up"：从下往上
+            "down"：从上往下
+            "left"：从右往左
+            "right"：从左往右
+        :return:
+        """
+        screen_width = self.driver.get_window_size()["width"]
+        screen_height = self.driver.get_window_size()["height"]
+
+        center_x = screen_width * 0.5
+        center_y = screen_height * 0.5
+
+        top_x = center_x
+        top_y = screen_height * 0.25
+        bottom_x = center_x
+        bottom_y = screen_height * 0.75
+        left_x = screen_width * 0.25
+        left_y = center_y
+        right_x = screen_width * 0.75
+        right_y = center_y
+
+        if direction == "up":
+            self.driver.swipe(bottom_x, bottom_y, top_x, top_y, 3000)
+        elif direction == "down":
+            self.driver.swipe(top_x, top_y, bottom_x, bottom_y, 3000)
+        elif direction == "left":
+            self.driver.swipe(right_x, right_y, left_x, left_y, 3000)
+        elif direction == "right":
+            self.driver.swipe(left_x, left_y, right_x, right_y, 3000)
+        else:
+            raise Exception("请检查 dir 参数，必须是 up/down/left/right")
+
+    def find_element_with_scroll(self, feature, direction="up"):
+        """
+        边滑边找执行的 feature 的元素
+        :param feature: 元素的特征
+        :return: 元素的内容
+        """
+        old_page_source = ""
+        while True:
+            try:
+                return self.find_element(feature)
+            except Exception:
+                self.scroll_page_one_time(direction)
+                if self.driver.page_source == old_page_source:
+                    raise Exception("没有找到这个特征对应的元素")
+                old_page_source = self.driver.page_source
