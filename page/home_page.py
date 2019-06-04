@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 
 from base.base_action import BaseAction
 
-
 class HomePage(BaseAction):
 
     # 我 按钮
@@ -11,3 +10,14 @@ class HomePage(BaseAction):
     # 点击 我
     def click_me(self):
         self.click(self.me_button)
+
+    # 如果没有登录，则登录
+    def login_if_not(self, page):
+        self.click_me()
+        if self.driver.current_activity != "com.yunmall.ymctoc.ui.activity.LogonActivity":  # 已经登录
+            return
+        # 登录操作
+        page.register.click_login()
+        page.login.input_username("itheima_test")
+        page.login.input_password("itheima")
+        page.login.click_login()
