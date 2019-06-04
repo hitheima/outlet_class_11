@@ -21,3 +21,6 @@ class BaseAction:
     def input(self, feature, value):
         self.clear(feature)
         self.find_element(feature).send_keys(value)
+
+    def get_feature_text(self, feature):
+        return self.find_element(feature).text
