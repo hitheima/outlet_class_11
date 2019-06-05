@@ -17,5 +17,6 @@ class TestUpdate:
         self.page.setting.click_about()
         # 关于 点击 版本更新
         self.page.about.click_update()
+
         # 断言 "当前已是最新版本" 的 toast 是不是出现在屏幕上
         assert self.page.about.is_toast_exist("当前已是最新版本")
