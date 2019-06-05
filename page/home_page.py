@@ -21,3 +21,4 @@ class HomePage(BaseAction):
         page.login.input_username("itheima_test")
         page.login.input_password("itheima")
         page.login.click_login()
+
