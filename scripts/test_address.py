@@ -20,7 +20,7 @@ class TestAddress:
         # 新增地址 输入 收件人
         self.page.edit_address.input_name("hello")
         # 新增地址 输入 手机号
-        self.page.edit_address.input_phone("18888888888")
+        self.page.edit_address.input_phone("18888888")
         # 新增地址 输入 详细地址
         self.page.edit_address.input_info("二单元 402")
         # 新增地址 输入 邮编
@@ -32,5 +32,7 @@ class TestAddress:
         # 新增地址 点击 保存
         self.page.edit_address.click_save()
 
+        self.page.edit_address.is_toast_exist("11位手机号")
+
         # 格式：姓名 + 2个空格 + 电话
-        assert self.page.address_list.get_receipt_name_text() == "%s  %s" % ("hello", "18888888888")
+        # assert self.page.address_list.get_receipt_name_text() == "%s  %s" % ("hello", "18888888888")

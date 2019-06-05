@@ -1,4 +1,5 @@
 import random
+import time
 
 from selenium.webdriver.common.by import By
 
@@ -68,6 +69,8 @@ class EditAddressPage(BaseAction):
             area_index = random.randint(0, len(areas) - 1)
             # 根据下标获取随机的地区，进行点击
             areas[area_index].click()
+
+            time.sleep(1)
 
     # 点击 保存
     def click_save(self):
