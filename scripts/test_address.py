@@ -46,3 +46,4 @@ class TestAddress:
             assert self.page.address_list.get_receipt_name_text() == "%s  %s" % (name, phone)
         else:
             assert self.page.edit_address.is_toast_exist(toast)
+
