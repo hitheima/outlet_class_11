@@ -31,3 +31,6 @@ class TestAddress:
         self.page.edit_address.choose_region()
         # 新增地址 点击 保存
         self.page.edit_address.click_save()
+
+        # 格式：姓名 + 2个空格 + 电话
+        assert self.page.address_list.get_receipt_name_text() == "%s  %s" % ("hello", "18888888888")
