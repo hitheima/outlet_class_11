@@ -24,15 +24,10 @@ class TestVip:
         # vip 点击 成为vip
         self.page.vip.click_be_vip()
 
-
-        assert self.is_can_not_be_vip("邀请码输入不正确")
+        assert self.page.vip.is_can_not_be_vip("邀请码输入不正确")
 
         # 切换到原生的环境
         self.driver.switch_to.context("NATIVE_APP")
 
 
 
-    def is_can_not_be_vip(self, cond):
-        while True:
-            if cond in self.driver.page_source:
-                return True
