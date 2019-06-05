@@ -1,3 +1,5 @@
+import time
+
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -103,3 +105,22 @@ class BaseAction:
                 if self.driver.page_source == old_page_source:
                     raise Exception("没有找到这个特征对应的元素")
                 old_page_source = self.driver.page_source
+
+    def is_keyword_in_page_source(self, keyword, timeout=3, poll=0.1):
+
+        start_time = time.time()
+        end_time = start_time + timeout
+
+        while True:
+
+            if time.time() > end_time:
+                print("最终 没有找到")
+                return False
+
+            if keyword in self.driver.page_source:
+                print("找到")
+                return True
+            else:
+                print("正在找，没有找到")
+
+            time.sleep(poll)

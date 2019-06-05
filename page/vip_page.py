@@ -30,21 +30,5 @@ class VipPage(BaseAction):
         :param poll:
         :return:
         """
-
-        start_time = time.time()
-        end_time = start_time + timeout
-
-        while True:
-
-            if time.time() > end_time:
-                print("最终 没有找到")
-                return False
-
-            if cond in self.driver.page_source:
-                print("找到")
-                return True
-            else:
-                print("正在找，没有找到")
-
-            time.sleep(poll)
+        return self.is_keyword_in_page_source(cond, timeout, poll)
 

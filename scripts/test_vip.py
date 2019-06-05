@@ -2,6 +2,7 @@ import time
 
 from base.base_driver import init_driver
 from page.page import Page
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class TestVip:
@@ -25,6 +26,7 @@ class TestVip:
         self.page.vip.click_be_vip()
 
         assert self.page.vip.is_can_not_be_vip("邀请码输入不正确")
+
 
         # 切换到原生的环境
         self.driver.switch_to.context("NATIVE_APP")
