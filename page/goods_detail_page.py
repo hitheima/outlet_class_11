@@ -54,15 +54,34 @@ class GoodsDetailPage(BaseAction):
         while True:
             # 点击 确认
             self.click_commit()
+            if self.is_toast_exist("购物车"):
+                break
 
             # 有没有 "请选择" 的 toast ，如果有，应该选择对应的规格，如果没有，加入成功
+            self.click_commit()
             if self.is_toast_exist("请选择"):
                 feature = By.XPATH, "//*[@text='%s']/../*[2]/*[1]" % self.get_spec_name()
                 self.click(feature)
-            else:
-                break
+                time.sleep(2)
 
-            time.sleep(2)
+
+    # @allure.step(title='商品详情 选择 所有的规格')
+    # def choose_spec(self):
+    #     while True:
+    #         # 点击 确认
+    #         self.click_commit()
+    #
+    #         # 有没有 "请选择" 的 toast ，如果有，应该选择对应的规格，如果没有，加入成功
+    #         if self.is_toast_exist("请选择"):
+    #             feature = By.XPATH, "//*[@text='%s']/../*[2]/*[1]" % self.get_spec_name()
+    #             self.click(feature)
+    #
+    #         else:
+    #             break
+    #
+    #         time.sleep(2)
+
+
 
     def is_product_title_exist(self, product_title):
         # 加入的商品的 xpath 的特征
