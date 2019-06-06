@@ -14,6 +14,15 @@ class AddressListPage(BaseAction):
     # 默认 标记
     default_address_tag = By.ID, "com.yunmall.lc:id/address_is_default"
 
+    # 编辑 按钮
+    edit_button = By.XPATH, "//*[@text='编辑']"
+
+    # 删除 按钮
+    delete_button = By.XPATH, "//*[@text='删除']"
+
+    # 确认按钮
+    commit_button = By.XPATH, "//*[@text='确认']"
+
     # 点击 新增地址
     def click_add_address(self):
         self.find_element_with_scroll(self.add_address_button).click()
@@ -30,3 +39,30 @@ class AddressListPage(BaseAction):
     # 点击 默认标记
     def click_default_address(self):
         self.click(self.default_address_tag)
+
+    # 点击 编辑 按钮
+    def click_edit(self):
+        self.click(self.edit_button)
+
+    # 点击 删除 按钮
+    def click_delete(self):
+        self.click(self.delete_button)
+
+    # 点击 确认 按钮
+    def click_commit(self):
+        self.click(self.commit_button)
+
+    # 在列表界面 删除一个地址
+    def delete_address(self):
+        self.click_edit()
+        self.click_delete()
+        self.click_commit()
+
+    def delete_address_ten_times(self):
+        for i in range(10):
+            self.click_edit()
+            try:
+                self.click_delete()
+            except Exception:
+                return
+            self.click_commit()
