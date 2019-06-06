@@ -7,9 +7,16 @@ class HomePage(BaseAction):
     # 我 按钮
     me_button = By.XPATH, "//*[@text='我' and @resource-id='com.yunmall.lc:id/tab_me']"
 
+    # 分类 按钮
+    category_button = By.XPATH, "//*[@text='分类' and @resource-id='com.yunmall.lc:id/tab_category']"
+
     # 点击 我
     def click_me(self):
         self.click(self.me_button)
+
+    # 点击 分类
+    def click_category(self):
+        self.click(self.category_button)
 
     # 如果没有登录，则登录
     def login_if_not(self, page):
