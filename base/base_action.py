@@ -26,6 +26,18 @@ class BaseAction:
         self.clear(feature)
         self.find_element(feature).send_keys(value)
 
+    def is_feature_exist(self, feature):
+        """
+        根据特征，判断这个特征是不是在当前屏幕上
+        :param feature: 特征
+        :return:
+        """
+        try:
+            self.find_element(feature)
+            return True
+        except TimeoutException:
+            return False
+
     def get_feature_text(self, feature):
         return self.find_element(feature).text
 

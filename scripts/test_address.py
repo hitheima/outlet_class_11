@@ -47,3 +47,32 @@ class TestAddress:
         else:
             assert self.page.edit_address.is_toast_exist(toast)
 
+    def test_edit_address(self):
+        # 在首页判断登录状态，如果没有登录则登录
+        self.page.home.login_if_not(self.page)
+        # 我 点击 设置
+        self.page.me.click_setting()
+        # 设置 点击 地址管理
+        self.page.setting.click_address_list()
+        # 根据 默认标记 判断是否有地址
+        if not self.page.address_list.is_default_address_tag_exist():
+            print("没有地址，准备添加")
+            # 默认不在，也就是没有任何地址，增加地址
+            # 地址列表 点击 新增地址
+            self.page.address_list.click_add_address()
+            # 新增地址 输入 收件人
+            self.page.edit_address.input_name("李四")
+            # 新增地址 输入 手机号
+            self.page.edit_address.input_phone("16666666666")
+            # 新增地址 输入 详细地址
+            self.page.edit_address.input_info("三单元 402")
+            # 新增地址 输入 邮编
+            self.page.edit_address.input_postal_code("200000")
+            # 新增地址 点击 设为默认地址
+            self.page.edit_address.click_default_address()
+            # 新增地址 选择区域
+            self.page.edit_address.choose_region()
+            # 新增地址 点击 保存
+            self.page.edit_address.click_save()
+
+        print("修改地址")
