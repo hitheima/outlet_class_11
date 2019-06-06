@@ -56,7 +56,6 @@ class TestAddress:
         self.page.setting.click_address_list()
         # 根据 默认标记 判断是否有地址
         if not self.page.address_list.is_default_address_tag_exist():
-            print("没有地址，准备添加")
             # 默认不在，也就是没有任何地址，增加地址
             # 地址列表 点击 新增地址
             self.page.address_list.click_add_address()
@@ -75,4 +74,19 @@ class TestAddress:
             # 新增地址 点击 保存
             self.page.edit_address.click_save()
 
-        print("修改地址")
+        # 地址列表 点击 默认标记
+        self.page.address_list.click_default_address()
+        # 编辑地址 输入 收件人
+        self.page.edit_address.input_name("李四")
+        # 编辑地址 输入 手机号
+        self.page.edit_address.input_phone("16666666666")
+        # 编辑地址 输入 详细地址
+        self.page.edit_address.input_info("三单元 402")
+        # 编辑地址 输入 邮编
+        self.page.edit_address.input_postal_code("200000")
+        # 编辑地址 选择区域
+        self.page.edit_address.choose_region()
+        # 编辑地址 点击 保存
+        self.page.edit_address.click_save()
+
+        self.page.address_list.is_toast_exist("保存成功")
