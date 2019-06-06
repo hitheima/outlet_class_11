@@ -5,6 +5,8 @@ from selenium.webdriver.common.by import By
 
 from base.base_action import BaseAction
 
+import allure
+
 
 class EditAddressPage(BaseAction):
 
@@ -33,30 +35,37 @@ class EditAddressPage(BaseAction):
     save_button = By.ID, "com.yunmall.lc:id/button_send"
 
     # 输入 收件人
+    @allure.step(title='编辑地址 输入 收件人')
     def input_name(self, value):
         self.input(self.name_edit_text, value)
 
     # 输入 手机号
+    @allure.step(title='编辑地址 输入 手机号')
     def input_phone(self, value):
         self.input(self.phone_edit_text, value)
 
     # 输入 详细地址
+    @allure.step(title='编辑地址 输入 详细地址')
     def input_info(self, value):
         self.input(self.info_edit_text, value)
 
     # 输入 邮编
+    @allure.step(title='编辑地址 输入 邮编')
     def input_postal_code(self, value):
         self.input(self.postal_code_edit_text, value)
 
     # 点击 设为默认地址
+    @allure.step(title='编辑地址 点击 设为默认地址')
     def click_default_address(self):
         self.click(self.default_address_button)
 
     # 点击 所在区域
+    @allure.step(title='编辑地址 点击 所在区域')
     def click_region(self):
         self.click(self.region_button)
 
     # 选择 所在区域
+    @allure.step(title='编辑地址 选择 所在区域')
     def choose_region(self):
         self.click_region()
         region_text = ""
@@ -76,6 +85,7 @@ class EditAddressPage(BaseAction):
             time.sleep(1)
 
     # 点击 保存
+    @allure.step(title='编辑地址 点击 保存')
     def click_save(self):
         self.click(self.save_button)
 

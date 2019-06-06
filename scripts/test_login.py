@@ -12,10 +12,8 @@ class TestLogin:
         self.driver = init_driver(no_reset=False)
         self.page = Page(self.driver)
 
-    def test_demo(self):
-        # 如果没有登录 就登陆
-        self.page.home.login_if_not(self.page)
-
+    def teardown(self):
+        self.driver.quit()
 
     @pytest.mark.parametrize("args", analyze_data("login_data", "test_login"))
     def test_login(self, args):

@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 from base.base_action import BaseAction
 
+import allure
 
 class AddressListPage(BaseAction):
 
@@ -24,6 +25,7 @@ class AddressListPage(BaseAction):
     commit_button = By.XPATH, "//*[@text='确认']"
 
     # 点击 新增地址
+    @allure.step(title='地址列表 点击 新增地址')
     def click_add_address(self):
         self.find_element_with_scroll(self.add_address_button).click()
 
@@ -37,18 +39,22 @@ class AddressListPage(BaseAction):
         return self.is_feature_exist(self.default_address_tag)
 
     # 点击 默认标记
+    @allure.step(title='地址列表 点击 默认标记')
     def click_default_address(self):
         self.click(self.default_address_tag)
 
     # 点击 编辑 按钮
+    @allure.step(title='地址列表 点击 编辑')
     def click_edit(self):
         self.click(self.edit_button)
 
     # 点击 删除 按钮
+    @allure.step(title='地址列表 点击 删除')
     def click_delete(self):
         self.click(self.delete_button)
 
     # 点击 确认 按钮
+    @allure.step(title='地址列表 点击 确认')
     def click_commit(self):
         self.click(self.commit_button)
 
@@ -58,6 +64,7 @@ class AddressListPage(BaseAction):
         self.click_delete()
         self.click_commit()
 
+    @allure.step(title='地址列表 删除 十次地址')
     def delete_address_ten_times(self):
         for i in range(10):
             self.click_edit()

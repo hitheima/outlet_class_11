@@ -10,6 +10,9 @@ class TestAddress:
         self.driver = init_driver()
         self.page = Page(self.driver)
 
+    def teardown(self):
+        self.driver.quit()
+
     @pytest.mark.parametrize("args", analyze_data("address_data", "test_add_address"))
     def test_add_address(self, args):
         name = args["name"]

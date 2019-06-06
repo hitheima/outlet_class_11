@@ -14,6 +14,9 @@ class TestVip:
         self.driver = init_driver()
         self.page = Page(self.driver)
 
+    def teardown(self):
+        self.driver.quit()
+
     @pytest.mark.parametrize("args", analyze_data("vip_data", "test_vip"))
     def test_vip(self, args):
 

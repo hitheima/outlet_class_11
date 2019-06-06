@@ -10,6 +10,9 @@ class TestShopCartCache:
         self.driver = init_driver()
         self.page = Page(self.driver)
 
+    def teardown(self):
+        self.driver.quit()
+
     def test_add_shop_cart(self):
         # 在首页判断登录状态，如果没有登录则登录
         self.page.home.login_if_not(self.page)
