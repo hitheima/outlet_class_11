@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 
 from base.base_action import BaseAction
@@ -11,6 +13,15 @@ class GoodsDetailPage(BaseAction):
     # 确认 按钮
     commit_button = By.XPATH, "//*[@text='确认']"
 
+    # 加入完成之后的+1提示
+    grand_total_text_view = By.ID, "com.yunmall.lc:id/tv_grand_total"
+
+    # 商品标题的特征
+    product_title_feature = By.ID, "com.yunmall.lc:id/tv_product_title"
+
+    # 购物车图标
+    shop_cart_button = By.ID, "com.yunmall.lc:id/btn_shopping_cart"
+
     # 点击 加入购物车
     def click_add_shop_cart(self):
         self.click(self.add_shop_cart_button)
@@ -19,8 +30,19 @@ class GoodsDetailPage(BaseAction):
     def click_commit(self):
         self.click(self.commit_button)
 
+    # 点击购物车图标
+    def click_shop_cart(self):
+        self.click(self.shop_cart_button)
+
     def get_spec_name(self):
         return self.get_toast_text("请选择").split(" ")[1]
+
+    def get_grand_total_text(self):
+        return self.get_feature_text(self.grand_total_text_view)
+
+    # 获取商品标题的所有文字
+    def get_product_title_text(self):
+        return self.get_feature_text(self.product_title_feature)
 
     def choose_spec(self):
         while True:
@@ -33,3 +55,10 @@ class GoodsDetailPage(BaseAction):
                 self.click(feature)
             else:
                 break
+
+            time.sleep(2)
+
+    def is_product_title_exist(self, product_title):
+        # 加入的商品的 xpath 的特征
+        product_title_feature = By.XPATH, "//*[@text='%s']" % product_title
+        return self.is_feature_exist(product_title_feature)
