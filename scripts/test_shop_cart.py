@@ -1,3 +1,5 @@
+import time
+
 from base.base_driver import init_driver
 from page.page import Page
 
@@ -19,3 +21,6 @@ class TestShopCartCache:
         self.page.goods_list.click_goods_detail()
         # 物品详情 点击 加入购物车
         self.page.goods_detail.click_add_shop_cart()
+
+        # 选择所有应该选择的规格
+        self.page.goods_detail.choose_spec()
